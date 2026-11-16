@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sudakov Construction</title>
+<meta name="description" content="Sudakov Construction — general contractor in West Newton, MA. Decks, patios, carpentry, siding, kitchen, bath and basement remodels. Free on-site estimates.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE everyday trade: solid, plain-spoken, a local builder you'd trust in your yard
+   IDEA a job-site sign + a lumber tag: charcoal board, cedar stamp, condensed stencil lettering
+   PICTURE an illustrated New England colonial with a fresh cedar deck being finished, sawhorse and lumber in front
+   COLOUR charcoal slate ground for bands, white page, cedar #c4622d accent, pine #ecd2a4 wood
+   TYPE Barlow Condensed 700 display + Barlow text
+   LAYOUT laptop: full-bleed scene, title + calls in the sky corner; phone: title, scene, buttons stacked */
+:root{color-scheme:light dark;
+--bg:light-dark(#ffffff,#141615);
+--ink:light-dark(#1c1f1e,#eef0ee);
+--mute:light-dark(#4c5350,#b4bab6);
+--line:light-dark(#dfe2df,#2e3331);
+--panel:light-dark(#f4f3ef,#1d2120);
+--slate:light-dark(#262b2a,#0d0f0e);
+--onslate:#f3f1ec;
+--cedar:light-dark(#c4622d,#e07a40);
+--cedar-d:light-dark(#9a4a1f,#b85d2c);
+--pine:#ecd2a4;
+--sky1:light-dark(#cfe3ee,#121a24);
+--sky2:light-dark(#f4f1e8,#2a3240);
+--house:light-dark(#f2f0ea,#3a403f);
+--house-s:light-dark(#d9d6cc,#2b302f);
+--roof:light-dark(#3b4140,#1b1f1e);
+--grass:light-dark(#6f8f4e,#2f4027);
+--grass2:light-dark(#86a660,#3b5030);
+--win:light-dark(#a9c4d3,#e8c477);
+}
+:root[data-theme=light]{color-scheme:light}
+:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Barlow,system-ui,sans-serif;overflow-x:clip}
+a{color:inherit}
+h1,h2,h3{font-family:"Barlow Condensed",Barlow,sans-serif;font-weight:700;line-height:1.05;letter-spacing:-.01em;margin:0;text-wrap:balance}
+h1{font-size:clamp(38px,5.4vw,64px)}
+h2{font-size:clamp(32px,3.6vw,46px)}
+h3{font-size:24px}
+p{margin:0}
+.band{padding-block:clamp(36px,5vw,72px);padding-left:max(5vw,16px,env(safe-area-inset-left,0px));padding-right:max(5vw,16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1240px;margin:0 auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:6px;font:600 17px Barlow,sans-serif;text-decoration:none;border:2px solid transparent;cursor:pointer;white-space:nowrap}
+.btn.pri{background:var(--cedar);color:#fff}
+.btn.pri:hover{background:var(--cedar-d)}
+.btn.sec{background:transparent;border-color:currentColor}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--cedar);outline-offset:2px}
+nav{position:sticky;top:0;z-index:10;background:var(--slate);color:var(--onslate)}
+nav .wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:10px max(5vw,16px)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 24px "Barlow Condensed",sans-serif}
+.logo svg{width:38px;height:38px}
+.links{display:flex;gap:18px;flex-wrap:wrap;margin-left:auto}
+.links a{text-decoration:none;font-weight:500;padding:8px 0}
+.links a:hover{color:var(--pine)}
+nav .btn{min-height:42px;padding:0 16px}
+.hero{position:relative;background:linear-gradient(var(--sky1),var(--sky2))}
+.hero .fig{position:relative;height:clamp(300px,45vw,560px);margin-top:-20px}
+.hero .fig svg{position:absolute;inset:0;width:100%;height:100%}
+.hero .copy{position:relative;z-index:2;max-width:1240px;margin:0 auto;padding:clamp(28px,4vw,56px) max(5vw,16px) 0}
+.hero .copy>*{max-width:760px}
+.hero .lead{font-size:clamp(17px,1.6vw,20px);margin-top:16px;color:var(--ink);max-width:34em}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.phone{margin-top:14px;font-weight:600;color:var(--mute)}
+.tag{display:inline-block;background:var(--slate);color:var(--onslate);font:600 15px Barlow,sans-serif;padding:6px 12px;border-radius:4px;margin-bottom:16px}
+.facts{background:var(--slate);color:var(--onslate)}
+.facts .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:24px}
+.facts b{display:block;font:700 26px "Barlow Condensed",sans-serif;color:var(--pine)}
+.facts span{color:#c9cdc9}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:24px 48px;align-items:end;margin-bottom:36px}
+.sec-head p{color:var(--mute);font-size:17px}
+.svc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:24px}
+.card svg{width:56px;height:56px;margin-bottom:14px}
+.card h3{margin-bottom:8px}
+.card p{color:var(--mute)}
+.card ul{margin:12px 0 0;padding-left:18px;color:var(--mute)}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;position:relative;counter-reset:s}
+.step{position:relative;padding:0 16px 0 0}
+.step .dot{width:52px;height:52px;border-radius:50%;background:var(--cedar);color:#fff;display:grid;place-items:center;font:700 24px "Barlow Condensed",sans-serif;position:relative;z-index:1}
+.step::before{content:"";position:absolute;top:25px;left:52px;right:0;height:3px;background:repeating-linear-gradient(90deg,var(--cedar) 0 10px,transparent 10px 18px)}
+.step:last-child::before{display:none}
+.step h3{margin:16px 0 6px;font-size:22px}
+.step p{color:var(--mute);font-size:15.5px}
+.area{background:var(--panel)}
+.area .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:40px;align-items:center}
+.towns{display:flex;flex-wrap:wrap;gap:10px}
+.town{padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:var(--bg);font-weight:600}
+.town.home{background:var(--cedar);color:#fff;border-color:var(--cedar)}
+.about .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+.about p+p{margin-top:14px}
+.about .lead2{font-size:19px}
+.list{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.list li{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+.list svg{flex:0 0 24px;width:24px;height:24px;margin-top:2px}
+.quote{background:var(--slate);color:var(--onslate)}
+.quote .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px}
+.quote .side p{color:#c9cdc9;margin-top:14px;font-size:17px}
+.quote .side .big{font:700 clamp(30px,3.4vw,42px) "Barlow Condensed",sans-serif;color:var(--pine);margin-top:22px;white-space:nowrap}
+form{background:var(--bg);color:var(--ink);border-radius:10px;padding:24px;display:grid;gap:16px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+label{display:grid;gap:6px;font-weight:600;font-size:15px}
+input,select,textarea{font:16px Barlow,sans-serif;padding:12px;border:1.5px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);width:100%}
+textarea{min-height:110px;resize:vertical}
+.err{color:#c23b22;font-size:14px;min-height:1em}
+#out{display:none;border:1.5px dashed var(--cedar);border-radius:8px;padding:16px;background:var(--panel)}
+#out.on{display:grid;gap:12px}
+#msg{white-space:pre-wrap;font-size:15px}
+.outbtns{display:flex;flex-wrap:wrap;gap:10px}
+.faq details{border-bottom:1px solid var(--line);padding:16px 0}
+.faq summary{cursor:pointer;font:700 22px "Barlow Condensed",sans-serif;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::after{content:"+";color:var(--cedar);font-size:28px;line-height:.8}
+.faq details[open] summary::after{content:"–"}
+.faq details p{color:var(--mute);margin-top:10px;max-width:60em}
+.faq .wrap{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:48px}
+footer{background:var(--slate);color:#c9cdc9;border-top:1px solid #3a403f}
+footer .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:24px}
+footer b{color:var(--onslate);display:block;margin-bottom:6px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--pine)}
+.small{font-size:14px;margin-top:24px;color:#9aa19d}
+.nowrap{white-space:nowrap}
+@media(max-width:900px){
+.svc{grid-template-columns:repeat(2,minmax(0,1fr))}
+.steps{grid-template-columns:minmax(0,1fr);gap:22px}
+.step{display:grid;grid-template-columns:52px minmax(0,1fr);gap:0 16px}
+.step h3{margin:4px 0 4px}
+.step .txt{grid-column:2}
+.step::before{top:52px;bottom:-22px;left:25px;right:auto;width:3px;height:auto;background:repeating-linear-gradient(180deg,var(--cedar) 0 10px,transparent 10px 18px)}
+.sec-head,.area .wrap,.about .wrap,.quote .wrap,.faq .wrap{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:600px){
+.links{display:none}
+.logo{font-size:20px}
+.logo svg{width:32px;height:32px}
+nav .btn{padding:0 12px;font-size:15px}
+nav .btn{margin-left:auto}
+.hero .fig{height:240px;margin-top:0}
+.svc{grid-template-columns:minmax(0,1fr)}
+.row{grid-template-columns:minmax(0,1fr)}
+.cta .btn{flex:1 1 auto}
+}
+@media(prefers-reduced-motion:no-preference){.saw{animation:bob 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}@keyframes bob{50%{transform:translateY(-4px)}}}
+</style>
+</head>
+<body>
+
+<nav>
+ <div class="wrap">
+  <a class="logo" href="#top" aria-label="Sudakov Construction home">
+   <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="6" fill="#c4622d"/><path d="M8 21 20 10l12 11" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round"/><text x="20" y="33" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="14" fill="#fff">SC</text></svg>
+   Sudakov Construction
+  </a>
+  <div class="links">
+   <a href="#services">Services</a>
+   <a href="#process">How we work</a>
+   <a href="#area">Service area</a>
+   <a href="#about">About</a>
+   <a href="#faq">FAQ</a>
+  </div>
+  <a class="btn pri" href="#quote">Free estimate</a>
+ </div>
+</nav>
+
+<header class="hero" id="top">
+ <div class="copy">
+  <span class="tag">General contractor · West Newton, MA</span>
+  <h1>Decks, carpentry and remodels, built by the two people you meet</h1>
+  <p class="lead">Small local crew. Free on-site estimate, a clear written quote, and both partners on every job from the first board to the final walkthrough.</p>
+  <div class="cta">
+   <a class="btn pri" href="#quote">Get a free estimate</a>
+   <a class="btn sec" href="tel:+16173724119">Call (617) 372-4119</a>
+  </div>
+  <p class="phone">Call or text Murad: <span class="nowrap">(617) 372-4119</span></p>
+ </div>
+ <div class="fig" aria-hidden="true">
+  <svg viewBox="0 100 1200 540" preserveAspectRatio="xMidYMax slice">
+   <defs>
+    <pattern id="clap" width="20" height="14" patternUnits="userSpaceOnUse"><rect width="20" height="14" fill="var(--house)"/><rect y="11" width="20" height="3" fill="var(--house-s)"/></pattern>
+    <pattern id="boards" width="22" height="20" patternUnits="userSpaceOnUse"><rect width="22" height="20" fill="#d9a46a"/><rect x="20" width="2" height="20" fill="#a86b36"/></pattern>
+    <linearGradient id="deckTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6b47a"/><stop offset="1" stop-color="#c98a4e"/></linearGradient>
+    <linearGradient id="tree" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--grass2)"/><stop offset="1" stop-color="var(--grass)"/></linearGradient>
+    <g id="bal"><rect width="7" height="62" fill="#e2ad72"/><rect x="5" width="2" height="62" fill="#b97a40"/></g>
+   </defs>
+   <!-- far trees -->
+   <g opacity=".55">
+    <ellipse cx="560" cy="360" rx="90" ry="120" fill="url(#tree)"/>
+    <ellipse cx="1150" cy="330" rx="110" ry="150" fill="url(#tree)"/>
+    <ellipse cx="660" cy="380" rx="60" ry="80" fill="url(#tree)"/>
+   </g>
+   <!-- house -->
+   <g>
+    <rect x="700" y="250" width="420" height="250" fill="url(#clap)"/>
+    <rect x="1080" y="250" width="40" height="250" fill="var(--house-s)" opacity=".7"/>
+    <polygon points="680,256 910,120 1140,256" fill="var(--roof)"/>
+    <polygon points="910,120 1140,256 1110,256 910,140" fill="#000" opacity=".18"/>
+    <rect x="980" y="130" width="34" height="80" fill="#8a4a2a"/>
+    <rect x="975" y="124" width="44" height="10" fill="#6d3a21"/>
+    <g fill="var(--win)" stroke="var(--house)" stroke-width="4">
+     <rect x="740" y="290" width="62" height="82"/><rect x="1010" y="290" width="62" height="82"/>
+     <rect x="740" y="400" width="62" height="70"/>
+    </g>
+    <g fill="var(--roof)"><rect x="728" y="290" width="12" height="82"/><rect x="802" y="290" width="12" height="82"/><rect x="998" y="290" width="12" height="82"/><rect x="1072" y="290" width="12" height="82"/></g>
+    <rect x="880" y="380" width="70" height="120" fill="#7a3f22"/>
+    <rect x="880" y="380" width="70" height="120" fill="none" stroke="var(--house)" stroke-width="5"/>
+    <circle cx="935" cy="444" r="4" fill="var(--pine)"/>
+   </g>
+   <!-- ground -->
+   <path d="M0 500 Q400 470 1200 492 V640 H0Z" fill="var(--grass)"/>
+   <path d="M0 540 Q500 515 1200 545 V640 H0Z" fill="var(--grass2)" opacity=".6"/>
+   <!-- deck -->
+   <g>
+    <polygon points="640,440 1120,440 1160,470 600,470" fill="url(#deckTop)"/>
+    <rect x="600" y="470" width="560" height="22" fill="#a86b36"/>
+    <rect x="600" y="470" width="560" height="22" fill="url(#boards)" opacity=".35"/>
+    <g fill="#8e5527"><rect x="615" y="492" width="16" height="60"/><rect x="790" y="492" width="16" height="60"/><rect x="960" y="492" width="16" height="60"/><rect x="1130" y="492" width="16" height="60"/></g>
+    <!-- steps -->
+    <g><rect x="520" y="478" width="80" height="14" fill="#d9a46a"/><rect x="520" y="492" width="80" height="6" fill="#9a5f2c"/><rect x="480" y="508" width="120" height="14" fill="#d9a46a"/><rect x="480" y="522" width="120" height="6" fill="#9a5f2c"/></g>
+    <!-- railing -->
+    <rect x="600" y="372" width="560" height="10" fill="#e9b97f"/>
+    <rect x="600" y="380" width="560" height="4" fill="#a86b36"/>
+    <g id="rail"></g>
+    <g fill="#c98a4e"><rect x="596" y="366" width="16" height="106"/><rect x="876" y="366" width="16" height="106"/><rect x="1150" y="366" width="16" height="106"/></g>
+   </g>
+   <!-- sawhorse + board -->
+   <g class="saw">
+    <rect x="150" y="512" width="300" height="16" fill="#e6b47a"/>
+    <rect x="150" y="524" width="300" height="5" fill="#a86b36"/>
+   </g>
+   <g stroke="#8e5527" stroke-width="10" stroke-linecap="round"><line x1="190" y1="532" x2="172" y2="600"/><line x1="200" y1="532" x2="222" y2="600"/><line x1="400" y1="532" x2="382" y2="600"/><line x1="410" y1="532" x2="432" y2="600"/></g>
+   <rect x="170" y="528" width="270" height="10" fill="#a86b36"/>
+   <ellipse cx="300" cy="606" rx="160" ry="8" fill="#000" opacity=".15"/>
+   <!-- lumber stack -->
+   <g>
+    <rect x="20" y="560" width="200" height="16" fill="#d9a46a"/><rect x="20" y="576" width="200" height="16" fill="#cf9a5f"/><rect x="34" y="544" width="180" height="16" fill="#e6b47a"/>
+    <g fill="#a86b36" opacity=".6"><rect x="20" y="574" width="200" height="2"/><rect x="34" y="558" width="180" height="2"/></g>
+   </g>
+   <!-- toolbox -->
+   <rect x="470" y="580" width="70" height="34" rx="3" fill="#c4622d"/><rect x="470" y="580" width="70" height="8" fill="#9a4a1f"/><path d="M490 580v-10h30v10" fill="none" stroke="#2a2a2a" stroke-width="5"/>
+  </svg>
+ </div>
+</header>
+
+<section class="facts band">
+ <div class="wrap">
+  <div><b>Free on-site estimates</b><span>We come out, measure and talk it through.</span></div>
+  <div><b>Clear written quotes</b><span>Scope, materials and price on paper before we start.</span></div>
+  <div><b>Two partners on every job</b><span>The people who quote it are the people who build it.</span></div>
+  <div><b>Massachusetts CSL licensed</b><span>Construction supervisor license on the team.</span></div>
+ </div>
+</section>
+
+<section class="band" id="services">
+ <div class="wrap">
+  <div class="sec-head">
+   <h2>What we build</h2>
+   <p>Most of our work is mid-size residential projects in and around Newton: the jobs too big for a handyman and too small for a large firm to care about.</p>
+  </div>
+  <div class="svc" id="svc"></div>
+ </div>
+</section>
+
+<section class="band" id="process">
+ <div class="wrap">
+  <div class="sec-head">
+   <h2>How a job runs</h2>
+   <p>No surprises. You know what is happening, what it costs and who is in your house at every step.</p>
+  </div>
+  <div class="steps" id="steps"></div>
+ </div>
+</section>
+
+<section class="band area" id="area">
+ <div class="wrap">
+  <div>
+   <h2>Where we work</h2>
+   <p style="margin-top:14px;color:var(--mute);font-size:17px">Based in West Newton. We stay close to home so we can be on site every day and come back quickly if anything needs a look. Not sure if you're in range? Just ask.</p>
+  </div>
+  <div class="towns" id="towns"></div>
+ </div>
+</section>
+
+<section class="band about" id="about">
+ <div class="wrap">
+  <div>
+   <h2>A small crew, on purpose</h2>
+   <p class="lead2" style="margin-top:18px">Sudakov Construction is two partners and a small crew working out of West Newton.</p>
+   <p>We keep the team small so the people who walk your project, write the quote and swing the hammer are the same. You get one phone number that answers, and a crew that leaves the site clean at the end of every day.</p>
+   <p>Call or text Murad at <span class="nowrap"><a href="tel:+16173724119">(617) 372-4119</a></span> to set up a time.</p>
+  </div>
+  <ul class="list" id="promise"></ul>
+ </div>
+</section>
+
+<section class="band quote" id="quote">
+ <div class="wrap">
+  <div class="side">
+   <h2>Get a free estimate</h2>
+   <p>Tell us about the project and we'll get back to you to set up a visit. A couple of photos sent by text help us come prepared.</p>
+   <p class="big">(617) 372-4119</p>
+   <p>Call or text Murad. Email: <a href="mailto:sudakovfred@gmail.com">sudakovfred@gmail.com</a></p>
+  </div>
+  <form id="f" novalidate>
+   <div class="row">
+    <label for="nm">Name<input id="nm" autocomplete="name" required></label>
+    <label for="ph">Phone<input id="ph" type="tel" autocomplete="tel" required></label>
+   </div>
+   <div class="row">
+    <label for="tw">Town<select id="tw"></select></label>
+    <label for="pj">Project<select id="pj"></select></label>
+   </div>
+   <label for="ds">About the project<textarea id="ds" placeholder="Size, what's there now, timing you have in mind"></textarea></label>
+   <p class="err" id="er" role="alert"></p>
+   <button class="btn pri" type="submit">Prepare my request</button>
+   <div id="out" aria-live="polite">
+    <p><b>Your request is ready.</b> Send it to us by text or email:</p>
+    <p id="msg"></p>
+    <div class="outbtns">
+     <a class="btn pri" id="sms" href="#">Send by text</a>
+     <a class="btn sec" id="eml" href="#">Send by email</a>
+     <button class="btn sec" type="button" id="cp">Copy</button>
+    </div>
+   </div>
+  </form>
+ </div>
+</section>
+
+<section class="band faq" id="faq">
+ <div class="wrap">
+  <h2>Common questions</h2>
+  <div id="qa"></div>
+ </div>
+</section>
+
+<footer class="band">
+ <div class="wrap">
+  <div><b>Sudakov Construction</b>General contractor<br>West Newton, Massachusetts</div>
+  <div><b>Contact</b><a href="tel:+16173724119">(617) 372-4119</a><br><a href="mailto:sudakovfred@gmail.com">sudakovfred@gmail.com</a></div>
+  <div><b>Services</b>Decks &amp; patios · Carpentry · Siding<br>Kitchens · Bathrooms · Basements</div>
+ </div>
+ <div class="wrap"><p class="small">© 2026 Sudakov Construction. Free estimates in Newton and nearby towns.</p></div>
+</footer>
+
+<script>
+{
+const ic={
+deck:'<rect x="6" y="24" width="44" height="7" fill="#c4622d"/><rect x="10" y="31" width="5" height="17" fill="#9a4a1f"/><rect x="41" y="31" width="5" height="17" fill="#9a4a1f"/><rect x="6" y="8" width="44" height="4" fill="#c4622d"/>'+[12,20,28,36,44].map(x=>`<rect x="${x}" y="12" width="3" height="12" fill="#c4622d"/>`).join(''),
+carp:'<rect x="6" y="34" width="44" height="10" fill="#ecd2a4" stroke="#9a4a1f" stroke-width="2"/><path d="M14 30 34 10l6 6-20 20z" fill="#c4622d"/><rect x="36" y="6" width="10" height="8" transform="rotate(45 41 10)" fill="#262b2a"/>',
+side:[10,18,26,34,42].map(y=>`<rect x="6" y="${y}" width="44" height="6" fill="${y%16?'#c4622d':'#ecd2a4'}" stroke="#9a4a1f" stroke-width="1.5"/>`).join(''),
+kit:'<rect x="6" y="26" width="44" height="22" fill="#ecd2a4" stroke="#9a4a1f" stroke-width="2"/><rect x="6" y="22" width="44" height="5" fill="#c4622d"/><line x1="28" y1="27" x2="28" y2="48" stroke="#9a4a1f" stroke-width="2"/><rect x="10" y="6" width="36" height="10" fill="#ecd2a4" stroke="#9a4a1f" stroke-width="2"/>',
+bath:'<path d="M6 26h44v6a12 12 0 0 1-12 12H18A12 12 0 0 1 6 32z" fill="#ecd2a4" stroke="#9a4a1f" stroke-width="2"/><path d="M12 26V12a5 5 0 0 1 10 0" fill="none" stroke="#c4622d" stroke-width="3"/><rect x="14" y="44" width="4" height="6" fill="#9a4a1f"/><rect x="38" y="44" width="4" height="6" fill="#9a4a1f"/>',
+base:'<path d="M4 22 28 6l24 16" fill="none" stroke="#9a4a1f" stroke-width="3"/><rect x="10" y="22" width="36" height="12" fill="#ecd2a4" stroke="#9a4a1f" stroke-width="2"/><rect x="6" y="34" width="44" height="16" fill="#c4622d"/><rect x="14" y="38" width="10" height="8" fill="#ecd2a4"/>'
+};
+const svc=[
+['deck','Decks & patios','New decks, rebuilds and repairs, stairs and railings, paver patios.',['Pressure-treated, cedar and composite','Rotten board and joist replacement','Stairs, railings, landings']],
+['carp','Carpentry','Interior and exterior finish and framing work, done square and tidy.',['Trim, doors and built-ins','Porches and entry steps','Framing and structural repairs']],
+['side','Siding','Siding repair and replacement, trim and exterior wood.',['Vinyl, wood and fiber cement','Rotted trim and sill repair','Exterior prep for paint']],
+['kit','Kitchen remodels','From cabinet swaps to full kitchen rebuilds.',['Cabinets, counters, backsplash','Layout changes and new flooring','Coordinated licensed trades']],
+['bath','Bathroom remodels','Updated bathrooms built to stay dry for years.',['Tile showers and tub surrounds','Vanities, fixtures, flooring','Ventilation and waterproofing']],
+['base','Basement finishing','Turn an unused basement into real living space.',['Framing, insulation, drywall','Flooring and trim','Family rooms, offices, guest space']]
+];
+document.getElementById('svc').innerHTML=svc.map(([k,t,d,l])=>`<article class="card"><svg viewBox="0 0 56 56" aria-hidden="true">${ic[k]}</svg><h3>${t}</h3><p>${d}</p><ul>${l.map(x=>`<li>${x}</li>`).join('')}</ul></article>`).join('');
+
+const steps=[
+['Call or text','Tell us what you have in mind. Photos help.'],
+['On-site visit','We come out, measure and talk through options. Free.'],
+['Written quote','Scope, materials, price and timing on paper.'],
+['We build','Both partners on site. Clean up every day.'],
+['Walkthrough','We go over the finished work with you before we call it done.']
+];
+document.getElementById('steps').innerHTML=steps.map(([t,d],i)=>`<div class="step"><div class="dot">${i+1}</div><div class="txt"><h3>${t}</h3><p>${d}</p></div></div>`).join('');
+
+const towns=['West Newton','Auburndale','Waban','Newton Lower Falls','Newton','Waltham','Weston','Brookline','Allston','Brighton'];
+document.getElementById('towns').innerHTML=towns.map((t,i)=>`<span class="town${i?'':' home'}">${t}</span>`).join('');
+
+const chk='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#c4622d"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const prom=['Free on-site estimate, no pressure','Written quote before any work starts','Both partners on site, every job','A phone number that actually answers','Site cleaned up at the end of each day'];
+document.getElementById('promise').innerHTML=prom.map(p=>`<li>${chk}<span>${p}</span></li>`).join('');
+
+const qa=[
+['Do you charge for estimates?','No. We come out, look at the project and give you a written quote at no cost.'],
+['How big a job do you take on?','Most of our work is mid-size residential: a new deck, a bathroom, a basement, siding on part of a house. If yours is bigger or smaller, ask and we will tell you honestly whether we are the right fit.'],
+['Who will actually be working at my house?','The two partners are on every job, with a small crew when the project needs it. You will not be handed off to people you have never met.'],
+['What about permits?','At the estimate we tell you which permits the work needs, and they are part of the written plan before anything starts.'],
+['How soon can you start?','It depends on the season and the size of the job. Call or text and we will give you a real date at the estimate.']
+];
+document.getElementById('qa').innerHTML=qa.map(([q,a],i)=>`<details${i?'':' open'}><summary>${q}</summary><p>${a}</p></details>`).join('');
+
+/* railing balusters */
+const r=document.getElementById('rail');
+let b='';for(let x=618;x<1150;x+=22){if(Math.abs(x-884)<14)continue;b+=`<use href="#bal" x="${x}" y="382"/>`;}
+r.innerHTML=b;
+
+/* form */
+const sel=(id,arr)=>document.getElementById(id).innerHTML=arr.map(v=>`<option>${v}</option>`).join('');
+sel('tw',[...towns,'Other']);
+sel('pj',['Deck or patio','Carpentry','Siding','Kitchen remodel','Bathroom remodel','Basement finishing','Something else']);
+const $=id=>document.getElementById(id);
+let text='';
+$('f').addEventListener('submit',e=>{
+ e.preventDefault();
+ const n=$('nm').value.trim(),p=$('ph').value.trim();
+ if(!n||!p){$('er').textContent='Please add your name and phone so we can call you back.';return;}
+ $('er').textContent='';
+ text=`Hi Murad, estimate request from the website.\nName: ${n}\nPhone: ${p}\nTown: ${$('tw').value}\nProject: ${$('pj').value}`+($('ds').value.trim()?`\nDetails: ${$('ds').value.trim()}`:'');
+ $('msg').textContent=text;
+ $('sms').href='sms:+16173724119?&body='+encodeURIComponent(text);
+ $('eml').href='mailto:sudakovfred@gmail.com?subject='+encodeURIComponent('Estimate request: '+$('pj').value)+'&body='+encodeURIComponent(text);
+ $('out').classList.add('on');
+});
+$('cp').addEventListener('click',async()=>{
+ try{await navigator.clipboard.writeText(text);$('cp').textContent='Copied';}catch(_){$('cp').textContent='Select the text above to copy';}
+});
+}
+</script>
+</body>
+</html>
