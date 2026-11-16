@@ -178,7 +178,7 @@ nav .btn{margin-left:auto}
    <a class="btn pri" href="#quote">Get a free estimate</a>
    <a class="btn sec" href="tel:+16173724119">Call (617) 372-4119</a>
   </div>
-  <p class="phone">Call or text Murad: <span class="nowrap">(617) 372-4119</span></p>
+  <p class="phone">Call or text: <span class="nowrap">(617) 372-4119</span></p>
  </div>
  <div class="fig" aria-hidden="true">
   <svg viewBox="0 100 1200 540" preserveAspectRatio="xMidYMax slice">
@@ -293,7 +293,7 @@ nav .btn{margin-left:auto}
    <h2>A small crew, on purpose</h2>
    <p class="lead2" style="margin-top:18px">Sudakov Construction is two partners and a small crew working out of West Newton.</p>
    <p>We keep the team small so the people who walk your project, write the quote and swing the hammer are the same. You get one phone number that answers, and a crew that leaves the site clean at the end of every day.</p>
-   <p>Call or text Murad at <span class="nowrap"><a href="tel:+16173724119">(617) 372-4119</a></span> to set up a time.</p>
+   <p>Call or text us at <span class="nowrap"><a href="tel:+16173724119">(617) 372-4119</a></span> to set up a time.</p>
   </div>
   <ul class="list" id="promise"></ul>
  </div>
@@ -305,7 +305,7 @@ nav .btn{margin-left:auto}
    <h2>Get a free estimate</h2>
    <p>Tell us about the project and we'll get back to you to set up a visit. A couple of photos sent by text help us come prepared.</p>
    <p class="big">(617) 372-4119</p>
-   <p>Call or text Murad. Email: <a href="mailto:sudakovfred@gmail.com">sudakovfred@gmail.com</a></p>
+   <p>Call or text anytime. Email: <a href="mailto:sudakovfred@gmail.com">sudakovfred@gmail.com</a></p>
   </div>
   <form id="f" novalidate>
    <div class="row">
@@ -409,7 +409,7 @@ $('f').addEventListener('submit',e=>{
  const n=$('nm').value.trim(),p=$('ph').value.trim();
  if(!n||!p){$('er').textContent='Please add your name and phone so we can call you back.';return;}
  $('er').textContent='';
- text=`Hi Murad, estimate request from the website.\nName: ${n}\nPhone: ${p}\nTown: ${$('tw').value}\nProject: ${$('pj').value}`+($('ds').value.trim()?`\nDetails: ${$('ds').value.trim()}`:'');
+ text=`Hi, estimate request from the website.\nName: ${n}\nPhone: ${p}\nTown: ${$('tw').value}\nProject: ${$('pj').value}`+($('ds').value.trim()?`\nDetails: ${$('ds').value.trim()}`:'');
  $('msg').textContent=text;
  $('sms').href='sms:+16173724119?&body='+encodeURIComponent(text);
  $('eml').href='mailto:sudakovfred@gmail.com?subject='+encodeURIComponent('Estimate request: '+$('pj').value)+'&body='+encodeURIComponent(text);
