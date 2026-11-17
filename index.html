@@ -14,7 +14,7 @@
    PICTURE an illustrated New England colonial with a fresh cedar deck being finished, sawhorse and lumber in front
    COLOUR charcoal slate ground for bands, white page, cedar #c4622d accent, pine #ecd2a4 wood
    TYPE Barlow Condensed 700 display + Barlow text
-   LAYOUT laptop: full-bleed scene, title + calls in the sky corner; phone: title, scene, buttons stacked */
+   LAYOUT laptop: full-bleed scene, title + text buttons in the sky; phone: title, scene, buttons stacked */
 :root{color-scheme:light dark;
 --bg:light-dark(#ffffff,#141615);
 --ink:light-dark(#1c1f1e,#eef0ee);
@@ -176,9 +176,9 @@ nav .btn{margin-left:auto}
   <p class="lead">Small local crew. Free on-site estimate, a clear written quote, and both partners on every job from the first board to the final walkthrough.</p>
   <div class="cta">
    <a class="btn pri" href="#quote">Get a free estimate</a>
-   <a class="btn sec" href="tel:+16173724119">Call (617) 372-4119</a>
+   <a class="btn sec" href="sms:+16173724119">Text (617) 372-4119</a>
   </div>
-  <p class="phone">Call or text Fred: <span class="nowrap">(617) 372-4119</span></p>
+  <p class="phone">Text Fred: <span class="nowrap">(617) 372-4119</span></p>
  </div>
  <div class="fig" aria-hidden="true">
   <svg viewBox="0 100 1200 540" preserveAspectRatio="xMidYMax slice">
@@ -292,8 +292,8 @@ nav .btn{margin-left:auto}
   <div>
    <h2>A small crew, on purpose</h2>
    <p class="lead2" style="margin-top:18px">Sudakov Construction is two partners and a small crew working out of West Newton.</p>
-   <p>We keep the team small so the people who walk your project, write the quote and swing the hammer are the same. You get one phone number that answers, and a crew that leaves the site clean at the end of every day.</p>
-   <p>Call or text Fred at <span class="nowrap"><a href="tel:+16173724119">(617) 372-4119</a></span> to set up a time.</p>
+   <p>We keep the team small so the people who walk your project, write the quote and swing the hammer are the same. You text one number and get an answer from the people doing the work, and a crew that leaves the site clean at the end of every day.</p>
+   <p>Text Fred at <span class="nowrap"><a href="sms:+16173724119">(617) 372-4119</a></span> to set up a time. Photos of the project help.</p>
   </div>
   <ul class="list" id="promise"></ul>
  </div>
@@ -303,14 +303,14 @@ nav .btn{margin-left:auto}
  <div class="wrap">
   <div class="side">
    <h2>Get a free estimate</h2>
-   <p>Tell us about the project and we'll get back to you to set up a visit. A couple of photos sent by text help us come prepared.</p>
-   <p class="big">(617) 372-4119</p>
-   <p>Call or text Fred. Email: <a href="mailto:sudakovfred@gmail.com">sudakovfred@gmail.com</a></p>
+   <p>Tell us about the project and we'll text you back to set up a visit. A couple of photos sent by text help us come prepared.</p>
+   <p class="big">Text (617) 372-4119</p>
+   <p>Text Fred, texts only please. Email: <a href="mailto:sudakovfred@gmail.com">sudakovfred@gmail.com</a></p>
   </div>
   <form id="f" novalidate>
    <div class="row">
     <label for="nm">Name<input id="nm" autocomplete="name" required></label>
-    <label for="ph">Phone<input id="ph" type="tel" autocomplete="tel" required></label>
+    <label for="ph">Mobile number<input id="ph" type="tel" autocomplete="tel" required></label>
    </div>
    <div class="row">
     <label for="tw">Town<select id="tw"></select></label>
@@ -318,7 +318,7 @@ nav .btn{margin-left:auto}
    </div>
    <label for="ds">About the project<textarea id="ds" placeholder="Size, what's there now, timing you have in mind"></textarea></label>
    <p class="err" id="er" role="alert"></p>
-   <button class="btn pri" type="submit">Prepare my request</button>
+   <button class="btn pri" type="submit">Prepare my text</button>
    <div id="out" aria-live="polite">
     <p><b>Your request is ready.</b> Send it to us by text or email:</p>
     <p id="msg"></p>
@@ -342,7 +342,7 @@ nav .btn{margin-left:auto}
 <footer class="band">
  <div class="wrap">
   <div><b>Sudakov Construction</b>General contractor<br>West Newton, Massachusetts</div>
-  <div><b>Contact</b><a href="tel:+16173724119">(617) 372-4119</a><br><a href="mailto:sudakovfred@gmail.com">sudakovfred@gmail.com</a></div>
+  <div><b>Contact</b>Text: <a href="sms:+16173724119">(617) 372-4119</a><br><a href="mailto:sudakovfred@gmail.com">sudakovfred@gmail.com</a></div>
   <div><b>Services</b>Decks &amp; patios · Carpentry · Siding<br>Kitchens · Bathrooms · Basements</div>
  </div>
  <div class="wrap"><p class="small">© 2026 Sudakov Construction. Free estimates in Newton and nearby towns.</p></div>
@@ -369,7 +369,7 @@ const svc=[
 document.getElementById('svc').innerHTML=svc.map(([k,t,d,l])=>`<article class="card"><svg viewBox="0 0 56 56" aria-hidden="true">${ic[k]}</svg><h3>${t}</h3><p>${d}</p><ul>${l.map(x=>`<li>${x}</li>`).join('')}</ul></article>`).join('');
 
 const steps=[
-['Call or text','Tell us what you have in mind. Photos help.'],
+['Send a text','Tell us what you have in mind. Photos help.'],
 ['On-site visit','We come out, measure and talk through options. Free.'],
 ['Written quote','Scope, materials, price and timing on paper.'],
 ['We build','Both partners on site. Clean up every day.'],
@@ -381,7 +381,7 @@ const towns=['West Newton','Auburndale','Waban','Newton Lower Falls','Newton','W
 document.getElementById('towns').innerHTML=towns.map((t,i)=>`<span class="town${i?'':' home'}">${t}</span>`).join('');
 
 const chk='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#c4622d"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-const prom=['Free on-site estimate, no pressure','Written quote before any work starts','Both partners on site, every job','A phone number that actually answers','Site cleaned up at the end of each day'];
+const prom=['Free on-site estimate, no pressure','Written quote before any work starts','Both partners on site, every job','Quick answers by text','Site cleaned up at the end of each day'];
 document.getElementById('promise').innerHTML=prom.map(p=>`<li>${chk}<span>${p}</span></li>`).join('');
 
 const qa=[
@@ -389,7 +389,7 @@ const qa=[
 ['How big a job do you take on?','Most of our work is mid-size residential: a new deck, a bathroom, a basement, siding on part of a house. If yours is bigger or smaller, ask and we will tell you honestly whether we are the right fit.'],
 ['Who will actually be working at my house?','The two partners are on every job, with a small crew when the project needs it. You will not be handed off to people you have never met.'],
 ['What about permits?','At the estimate we tell you which permits the work needs, and they are part of the written plan before anything starts.'],
-['How soon can you start?','It depends on the season and the size of the job. Call or text and we will give you a real date at the estimate.']
+['How soon can you start?','It depends on the season and the size of the job. Text us and we will give you a real date at the estimate.']
 ];
 document.getElementById('qa').innerHTML=qa.map(([q,a],i)=>`<details${i?'':' open'}><summary>${q}</summary><p>${a}</p></details>`).join('');
 
@@ -407,7 +407,7 @@ let text='';
 $('f').addEventListener('submit',e=>{
  e.preventDefault();
  const n=$('nm').value.trim(),p=$('ph').value.trim();
- if(!n||!p){$('er').textContent='Please add your name and phone so we can call you back.';return;}
+ if(!n||!p){$('er').textContent='Please add your name and phone so we can text you back.';return;}
  $('er').textContent='';
  text=`Hi Fred, estimate request from the website.\nName: ${n}\nPhone: ${p}\nTown: ${$('tw').value}\nProject: ${$('pj').value}`+($('ds').value.trim()?`\nDetails: ${$('ds').value.trim()}`:'');
  $('msg').textContent=text;
