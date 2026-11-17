@@ -136,7 +136,34 @@ footer a{text-decoration:none}
 footer a:hover{color:var(--pine)}
 .small{font-size:14px;margin-top:24px;color:#a9bbb2}
 .nowrap{white-space:nowrap}
+.work{background:var(--panel)}
+.jobs{display:grid;gap:clamp(28px,4vw,48px)}
+.job{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px 36px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:clamp(14px,2vw,22px)}
+.job.wide{grid-template-columns:minmax(0,1fr)}
+.job .cover{display:block;padding:0;border:0;background:none;cursor:zoom-in;border-radius:6px;overflow:hidden;width:100%}
+.job img{display:block;width:100%;height:auto}
+.job .info{display:flex;flex-direction:column;gap:12px}
+.job.wide .info{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 36px}
+.job .where{font-weight:600;color:var(--cedar)}
+.job .txt p{color:var(--mute)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.chips span{font-size:14px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--panel);border:1px solid var(--line)}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;align-content:start}
+.thumbs button{padding:0;border:0;border-radius:4px;overflow:hidden;cursor:zoom-in;aspect-ratio:4/3;background:var(--line)}
+.thumbs img{width:100%;height:100%;object-fit:cover;transition:transform .2s}
+.thumbs button:hover img{transform:scale(1.05)}
+.work .more{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;color:var(--mute);font-size:17px}
+#lb{border:0;padding:0;background:rgba(8,14,12,.94);max-width:100vw;max-height:100vh;width:100vw;height:100vh;margin:0}
+#lb::backdrop{background:rgba(8,14,12,.92)}
+#lb .in{position:absolute;inset:0;display:grid;grid-template-rows:minmax(0,1fr) auto;place-items:center;padding:56px 16px 16px}
+#lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px}
+#lb p{color:#eef0ee;text-align:center;margin-top:10px;font-size:15px}
+#lb .x,#lb .nv{position:absolute;background:rgba(0,0,0,.45);color:#fff;border:0;border-radius:50%;width:48px;height:48px;font-size:26px;line-height:1;cursor:pointer;display:grid;place-items:center}
+#lb .x{top:8px;right:8px}
+#lb .nv{top:50%;transform:translateY(-50%)}
+#lb .pv{left:8px}#lb .nx{right:8px}
 @media(max-width:900px){
+.job,.job.wide .info{grid-template-columns:minmax(0,1fr)}
 .svc{grid-template-columns:repeat(2,minmax(0,1fr))}
 .steps{grid-template-columns:minmax(0,1fr);gap:22px}
 .step{display:grid;grid-template-columns:52px minmax(0,1fr);gap:0 16px}
@@ -169,6 +196,7 @@ nav .btn{margin-left:auto}
   </a>
   <div class="links">
    <a href="#services">Services</a>
+   <a href="#work">Our work</a>
    <a href="#process">How we work</a>
    <a href="#area">Service area</a>
    <a href="#about">About</a>
@@ -275,6 +303,27 @@ nav .btn{margin-left:auto}
   <div class="svc" id="svc"></div>
  </div>
 </section>
+
+<section class="band work" id="work">
+ <div class="wrap">
+  <div class="sec-head">
+   <h2>Our work</h2>
+   <p>Recent jobs from around the area, with before and after photos. Tap any photo to see it full size.</p>
+  </div>
+  <div class="jobs" id="jobs"></div>
+  <div class="more"><span>Have a project like these?</span><a class="btn pri" href="sms:+16173724119">Text Fred (617) 372-4119</a></div>
+ </div>
+</section>
+
+<dialog id="lb" aria-label="Photo viewer">
+ <div class="in">
+  <img id="lbi" alt="">
+  <p id="lbc"></p>
+ </div>
+ <button class="x" type="button" id="lbx" aria-label="Close">&times;</button>
+ <button class="nv pv" type="button" id="lbp" aria-label="Previous photo">&#8249;</button>
+ <button class="nv nx" type="button" id="lbn" aria-label="Next photo">&#8250;</button>
+</dialog>
 
 <section class="band" id="process">
  <div class="wrap">
@@ -401,6 +450,57 @@ const qa=[
 ['How soon can you start?','It depends on the season and the size of the job. Text us and we will give you a real date at the estimate.']
 ];
 document.getElementById('qa').innerHTML=qa.map(([q,a],i)=>`<details${i?'':' open'}><summary>${q}</summary><p>${a}</p></details>`).join('');
+
+/* OUR WORK gallery
+   To add a job: put photos in img/work/<folder>/ as name.jpg (max 1600px) + name-sm.jpg (max 720px),
+   then add one entry below. The first photo is the big cover; wide:true for a wide cover image. */
+const work=[
+{folder:'wayland-deck',wide:true,title:'Backyard deck and paver patio',where:'Wayland, MA',
+ tags:['Composite deck','Paver patio','Walkway'],
+ text:['The old pressure-treated deck behind this home was gray, mossy and soft in spots, and the only way down was a loose granite block.',
+       'We tore it out and built a new low-maintenance composite deck with matching fascia and a wide wrap-around step. A new paver patio with a dark border now runs along the house and around the deck, with a paver walkway along the side of the house. No more staining, splinters or rot.'],
+ photos:[['side-by-side','Before and after: old gray wood deck replaced with a new composite deck',1600,597],
+  ['deck-1','New composite deck with wrap-around step and paver patio'],
+  ['deck-step','Close-up of the wrap-around composite step'],
+  ['deck-2','Composite deck along the back of the house'],
+  ['deck-patio','Deck and patio seen from the side yard'],
+  ['deck-3','Deck from the patio'],
+  ['patio-1','Paver patio with the low deck in the corner'],
+  ['patio-2','Curved paver patio edge with a dark border'],
+  ['patio-3','Patio and deck with the back yard'],
+  ['walkway','Paver walkway along the side of the house'],
+  ['before','Before: weathered wood deck with loose boards']]},
+{folder:'belmont-steps',title:'Front entry steps rebuilt in brick and stone',where:'Belmont, MA',
+ tags:['Masonry','Brick steps','Flagstone'],
+ text:['These brick front steps had loose and shifting bricks, open mortar joints and uneven treads that had become a tripping hazard.',
+       'We took the steps down, rebuilt them on a solid base, and laid new brick treads with stone risers and a flagstone landing that ties into the existing walkway. The wrought-iron railings were reset securely. A safe, level entrance built for New England winters.'],
+ photos:[['before-after','Before and after: worn brick steps rebuilt with new brick treads and stone risers'],
+  ['closeup-before-after','Close-up before and after: old brick treads next to the rebuilt brick and stone steps',1600,597],
+  ['before','Before: loose bricks and open mortar joints on the old steps'],
+  ['after-closeup','After, close-up: new brick treads, stone risers and flagstone'],
+  ['after','Finished brick and stone front steps with iron railings',1200,1600]]}
+];
+const all=[];
+document.getElementById('jobs').innerHTML=work.map(j=>{
+ const ph=j.photos.map(([f,alt,w=1600,h=1200])=>{const i=all.length;all.push({src:`img/work/${j.folder}/${f}.jpg`,alt,cap:`${j.title} · ${j.where}`});return {i,f,alt,w,h};});
+ const c=ph[0];
+ return `<article class="job${j.wide?' wide':''}">
+  <button class="cover" type="button" data-i="${c.i}"><img src="img/work/${j.folder}/${c.f}.jpg" srcset="img/work/${j.folder}/${c.f}-sm.jpg 720w, img/work/${j.folder}/${c.f}.jpg 1600w" sizes="(max-width:900px) 92vw, ${j.wide?'1200px':'680px'}" width="${c.w}" height="${c.h}" alt="${c.alt}" loading="lazy" decoding="async"></button>
+  <div class="info">
+   <div class="txt"><h3>${j.title}</h3><p class="where">${j.where}</p>${j.text.map(t=>`<p style="margin-top:10px">${t}</p>`).join('')}<div class="chips" style="margin-top:14px">${j.tags.map(t=>`<span>${t}</span>`).join('')}</div></div>
+   ${ph.length>1?`<div class="thumbs">${ph.slice(1).map(p=>`<button type="button" data-i="${p.i}" aria-label="View photo: ${p.alt}"><img src="img/work/${j.folder}/${p.f}-sm.jpg" alt="${p.alt}" loading="lazy" decoding="async" width="240" height="180"></button>`).join('')}</div>`:''}
+  </div>
+ </article>`;}).join('');
+const lb=document.getElementById('lb');let cur=0;
+const show=i=>{cur=(i+all.length)%all.length;const p=all[cur];document.getElementById('lbi').src=p.src;document.getElementById('lbi').alt=p.alt;document.getElementById('lbc').textContent=`${p.alt} — ${p.cap}`;};
+document.getElementById('jobs').addEventListener('click',e=>{const b=e.target.closest('[data-i]');if(!b)return;show(+b.dataset.i);lb.showModal();});
+document.getElementById('lbx').onclick=()=>lb.close();
+document.getElementById('lbp').onclick=()=>show(cur-1);
+document.getElementById('lbn').onclick=()=>show(cur+1);
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('in'))lb.close();});
+lb.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1);});
+let tx=null;lb.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+lb.addEventListener('touchend',e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50)show(cur+(d<0?1:-1));tx=null;});
 
 /* railing balusters */
 const r=document.getElementById('rail');
